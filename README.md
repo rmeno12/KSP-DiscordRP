@@ -1,7 +1,2 @@
 # KSP DiscordRP
-Discord Rich Presence integration mod for KSP
-
-This mod sends various updates about your current KSP status to Discord to be displayed to other users.
-
-## Libraries
- - [discord-rpc](https://github.com/discordapp/discord-rpc) - To send Rich Presence updates to Discord
+Discord Rich Presence integration mod for KSP based on [gegy1000/KSP-DiscordRP](https://github.com/gegy1000/KSP-DiscordRP).

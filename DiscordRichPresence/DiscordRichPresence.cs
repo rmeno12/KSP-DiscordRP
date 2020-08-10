@@ -25,6 +25,7 @@ namespace DiscordRichPresence
 
         void Awake()
         {
+            Debug.Log("DiscordRichPresence: Plugin Awake");
             lastUpdateTime = Time.time;
             activity = new IdleActivity(Utils.GetUnixTime(), GameScenes.LOADING);
         }
@@ -33,7 +34,9 @@ namespace DiscordRichPresence
         {
             Debug.Log("DiscordRichPresence: Plugin Startup");
 
-            discord = new Discord.Discord(386261941259337738, (ulong)CreateFlags.Default);
+            // TODO: Create own application with own images, etc
+            discord = new Discord.Discord(386261941259337738, (ulong)CreateFlags.NoRequireDiscord);
+            Debug.Log(discord.ToString());
             activityManager = discord.GetActivityManager();
             activityTracker = new ActivityTracker();
 
@@ -51,19 +54,20 @@ namespace DiscordRichPresence
 
         void Update()
         {
+            //Debug.Log("DiscordRichPresence: Plugin Update");
             activityTracker.UpdateTimers();
 
             float currentTime = Time.time;
 
             if (currentTime - lastUpdateTime > updateInterval || !initialized)
             {
-                Debug.Log("DRP: check");
                 lastUpdateTime = currentTime;
 
                 UpdateRichPresence(activityTracker.GetCurrentActivityHolder());
 
                 initialized = true;
             }
+            discord.RunCallbacks();
         }
 
         void UpdateRichPresence(ActivityHolder activityHolder)
@@ -73,12 +77,10 @@ namespace DiscordRichPresence
 
             if (!activity.Equals(prev) || !initialized)
             {
+                Debug.Log("DiscordRichPresence: About to update presence");
                 activityManager.UpdateActivity(activity.GetActivity(), (result) => 
                 {
-                    if (result != Result.Ok)
-                    {
-                        Debug.Log(string.Format("DiscordRichPresence: UpdateActivity failed ({0})", result));
-                    }
+                    Debug.Log(string.Format("DiscordRichPresence: Result is ({0})", result));
                 });
             }
         }

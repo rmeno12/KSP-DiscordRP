@@ -3,3 +3,5 @@ DiscordRichPresence/obj/
 Build/
 Releases/
 .vs/
+out/
+*.zip

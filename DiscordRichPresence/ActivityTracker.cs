@@ -1,11 +1,4 @@
-﻿using Discord;
-using DiscordRichPresence.Activities;
-using Expansions.Missions.Editor;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DiscordRichPresence.Activities;
 
 namespace DiscordRichPresence
 {
